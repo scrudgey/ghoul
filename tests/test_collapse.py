@@ -4,21 +4,15 @@
 test_collapse
 ----------------------------------
 
-Basic tests for `Symbol` module.
+testing of basic collapsing features for `ghouls` module.
 
-test framework
-   different object trees / minimal test tree
-   notebook vs standalone
-
+tests:
  ✓ test collapse
  ✓ test selective collapse
  ✓ test collapsing to multiple values
  ✓ test collapsing simultaneous
- test collapsing to subclass
  test improper collapse catching
 
- ✓ test attribute removal
- ✓ test attribute adoption
 """
 
 import unittest

@@ -206,8 +206,15 @@ def Subset(value, target, depth=0):
     # print('\t'*depth, is_subset)
     return None
 
-class Abstract(object):
-    _abstract = True
+def symbol_includes(symbol, object_type):
+    types = [type(value) for value in symbol.values]
+    return object_type in types
+
+def symbol_includes_all(symbol, types):
+    return all([symbol_includes(symbol, t) for t in types])
+
+def symbol_includes_any(symbol, types):
+    return any([symbol_includes(symbol, t) for t in types])
 
 # class Symbolic(object):
 #     def __init__(self):

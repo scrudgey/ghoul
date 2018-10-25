@@ -1,24 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-test_collapse
+test_subclass
 ----------------------------------
 
-Basic tests for `ghoul` module.
+testing subclass interaction for `ghoul` module.
 
-test framework
-   different object trees / minimal test tree
-   notebook vs standalone
-
- ✓ test collapse
- ✓ test selective collapse
- ✓ test collapsing to multiple values
- ✓ test collapsing simultaneous
- test collapsing to subclass
- test improper collapse catching
-
- ✓ test attribute removal
- ✓ test attribute adoption
+tests:
+ ✓ test collapsing to subclass
 """
 
 import unittest
