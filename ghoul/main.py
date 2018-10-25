@@ -49,7 +49,6 @@ class Symbol(object):
         raise AttributeError("{} object has no attribute {}".format(self.__class__, attr))
     
     def CalcAttributes(self):
-        # TODO: drop deprecated attributes
         for key in self.children:
             delattr(self, key)
         self.children = {}
@@ -68,8 +67,8 @@ class Symbol(object):
             # implies recursion!
             symbol = Symbol(vals)
             symbol.parent = self
-            symbol.attribute_name = key
             self.children[key] = symbol
+            symbol.attribute_name = key
             setattr(self, key, symbol)
     
     def Observe(self):
