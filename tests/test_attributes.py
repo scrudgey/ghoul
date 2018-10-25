@@ -39,9 +39,3 @@ class AttrTest(unittest.TestCase):
 
 if __name__ == '__main__':
   unittest.main()
-
-
-# interpret
-# interpret parse=False
-# parse
-# nested parse
