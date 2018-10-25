@@ -1,0 +1,37 @@
+=====
+ghoul
+=====
+
+
+.. image:: https://img.shields.io/pypi/v/ghoul.svg
+        :target: https://pypi.python.org/pypi/ghoul
+
+.. image:: https://img.shields.io/travis/scrudgey/ghoul.svg
+        :target: https://travis-ci.org/scrudgey/ghoul
+
+.. image:: https://readthedocs.org/projects/ghoul/badge/?version=latest
+        :target: https://ghoul.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+
+
+
+Bottom-up procedural generation
+
+
+* Free software: MIT license
+* Documentation: https://ghoul.readthedocs.io.
+
+
+Features
+--------
+
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
