@@ -4,7 +4,7 @@
 test_collapse
 ----------------------------------
 
-Basic tests for `Symbol` module.
+Basic tests for `ghoul` module.
 
 test framework
    different object trees / minimal test tree
