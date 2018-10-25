@@ -127,7 +127,7 @@ class Symbol(object):
         if len(new_vals) == 0:
             raise Exception('empty restriction!')
         self.InitVals(new_vals)
-
+        self.CalcAttributes()
         if self.parent is not None and upward is True:
             self.parent.Restrict(self, self.attribute_name)
 
