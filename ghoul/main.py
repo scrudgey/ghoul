@@ -9,6 +9,7 @@ class Symbol(object):
     def __init__(self, values):
         self.parent = None
         self.children = {}
+        self._methods = []
         self.InitVals(values)
         self.CalcAttributes()
         
@@ -51,7 +52,11 @@ class Symbol(object):
     def CalcAttributes(self):
         for key in self.children:
             delattr(self, key)
+        for key in self._methods:
+            delattr(self, key)
+
         self.children = {}
+        self._methods = []
         attribute_values = defaultdict(list)
         for value in self.values:
             if type(value) in PRIMITIVE_TYPES:
@@ -63,6 +68,8 @@ class Symbol(object):
                     attribute_values[key].extend(val)
                 else:
                     attribute_values[key].append(val)
+            for method_name in MethodsDict(value):
+                self.GeneralizeMethod(method_name)
         for key, vals in attribute_values.items():
             # implies recursion!
             symbol = Symbol(vals)
@@ -70,6 +77,19 @@ class Symbol(object):
             self.children[key] = symbol
             symbol.attribute_name = key
             setattr(self, key, symbol)
+    
+    def GeneralizeMethod(self, method_name):
+        if hasattr(self, method_name):
+            return
+        mros = [type(obj).mro() for obj in self.values]
+        common_types = [t for t in mros[0] if all([t in mro for mro in mros])]
+        for t in common_types:
+            if hasattr(t, method_name):
+                method = getattr(t, method_name)
+                x = lambda *args, **kwargs: method(self, *args, **kwargs)
+                setattr(self, method_name, x)
+                self._methods.append(method_name)
+                return
     
     def Observe(self):
         if self._value:
@@ -140,6 +160,16 @@ def AttributesDict(obj):
     for fn in filters:
         attributes = {k: v for k, v in attributes.items() if fn(k, v)}
     return attributes
+
+def MethodsDict(obj):
+    filters = [
+        lambda key, value: key[0] != '_',
+        lambda key, value: callable(value),
+    ]
+    methods = {i: obj.__getattribute__(i) for i in dir(obj) if i[0] != '_'}
+    for fn in filters:
+        methods = {k: v for k, v in methods.items() if fn(k, v)}
+    return methods
 
 def Subset(value, target, depth=0):
     '''Return the subset of value that spans target. If no
@@ -214,7 +244,6 @@ def symbol_includes_all(symbol, types):
 
 def symbol_includes_any(symbol, types):
     return any([symbol_includes(symbol, t) for t in types])
-
 # class Symbolic(object):
 #     def __init__(self):
 #         self.symbols = WeakKeyDictionary()
