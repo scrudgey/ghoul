@@ -16,7 +16,11 @@ ghoul
 .. image:: https://coveralls.io/repos/github/scrudgey/ghoul/badge.svg?branch=master
         :target: https://coveralls.io/github/scrudgey/ghoul?branch=master
 
+.. image:: https://img.shields.io/lgtm/grade/python/g/scrudgey/ghoul.svg?logo=lgtm&logoWidth=18
+        :target: https://lgtm.com/projects/g/scrudgey/ghoul/context:python
 
+.. image:: https://img.shields.io/lgtm/alerts/g/scrudgey/ghoul.svg?logo=lgtm&logoWidth=18
+        :target: https://lgtm.com/projects/g/scrudgey/ghoul/alerts/
 
 
 
