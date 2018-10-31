@@ -11,6 +11,14 @@ TODO: design test.
 import unittest
 from ghoul import Intersection
 
+class TestValues(unittest.TestCase):
+    def test_ints(self):
+        self.assertTrue(Intersection(1, 1) == 1)
+        self.assertIsNone(Intersection(1, 2))
+    def test_str(self):
+        self.assertTrue(Intersection('a', 'a') == 'a')
+        self.assertIsNone(Intersection('a', 'b'))
+
 class TestLists(unittest.TestCase):
     def test_ints(self):
         # 1 ∩ 1 == 1
@@ -25,6 +33,9 @@ class TestLists(unittest.TestCase):
         self.assertIsNone(Intersection([1, 2, 3], [6, 7, 8]))
         # len(1 ∩ 2) == 1
         self.assertTrue(Intersection([1, 2, 3], [3]) == 3)
+        # duplicates
+        self.assertTrue(Intersection([1, 1, 2], [1]) == [1, 1])
+        # self.assertTrue(Intersection([1], [1, 1, 2]) == [1, 1])
     def test_str(self):
         # 1 ∩ 1 == 1
         self.assertTrue(Intersection(['a', 'b', 'c'], ['a', 'b', 'c']) == ['a', 'b', 'c'])
@@ -38,17 +49,26 @@ class TestLists(unittest.TestCase):
         self.assertIsNone(Intersection(['a', 'b', 'c'], ['d', 'e', 'f']))
         # len(1 ∩ 2) == 1
         self.assertTrue(Intersection(['a', 'b', 'c'], ['a']) == 'a')
-    # duplicates
+    
 
-class TestValues(unittest.TestCase):
-    def test_ints(self):
-        self.assertTrue(Intersection(1, 1) == 1)
-        self.assertIsNone(Intersection(1, 2))
-    def test_str(self):
-        self.assertTrue(Intersection('a', 'a') == 'a')
-        self.assertIsNone(Intersection('a', 'b'))
+class TestAlgebraOfSets(unittest.TestCase):
+    # commutative
+    # A ∩ B = B ∩ A
 
-class TestAlgebraicProperties(unittest.TestCase):
+    # associative
+    # (A ∩ B) ∩ C = A ∩ (B ∩ C)
+
+    # law of identity
+    # A ∩ A = A
+
+    # idempotent law
+    
+
+    # law of U
+    # U ∩ A = A
+
+    # distributive law
+    # A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
     pass
 
 if __name__ == '__main__':
