@@ -13,6 +13,10 @@ ghoul
         :target: https://ghoul.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
+.. image:: https://coveralls.io/repos/github/scrudgey/ghoul/badge.svg?branch=master
+        :target: https://coveralls.io/github/scrudgey/ghoul?branch=master
+
+
 
 
 
