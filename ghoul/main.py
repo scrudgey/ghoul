@@ -172,7 +172,7 @@ def MethodsDict(obj):
     return methods
 
 def Subset(value, target, depth=0):
-    '''Return the subset of value that spans target. If no
+    '''Return the intersection of value and target. If no
     such subset exists, return None
     '''
 
@@ -187,7 +187,8 @@ def Subset(value, target, depth=0):
         else:
             return None
 
-    # TODO: explain why this works
+    # if value is a list of elements, we must return only those that are a subset
+    # of target. if none are, return None.
     if type(value) is list:
         results = [Subset(element, target, depth=depth+1) for element in value]
         results = [result for result in results if result is not None]
@@ -204,7 +205,7 @@ def Subset(value, target, depth=0):
     if type(target) is Symbol:
         return Subset(value, target.values, depth=depth+1)
 
-    # TODO: explain why this works
+    # TODO: this code is probably incorrect. create test and fix.
     if type(target) is list:
         for element in target:
             result = Subset(value, element, depth=depth+1)
