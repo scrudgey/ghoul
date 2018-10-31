@@ -17,7 +17,8 @@ ghoul
         :target: https://coveralls.io/github/scrudgey/ghoul?branch=master
 
 
-
+.. image:: https://img.shields.io/lgtm/alerts/g/scrudgey/ghoul.svg?logo=lgtm&logoWidth=18
+        :target: https://lgtm.com/projects/g/scrudgey/ghoul/alerts/
 
 
 Bottom-up procedural generation
