@@ -22,6 +22,8 @@ ghoul
 .. image:: https://img.shields.io/lgtm/alerts/g/scrudgey/ghoul.svg?logo=lgtm&logoWidth=18
         :target: https://lgtm.com/projects/g/scrudgey/ghoul/alerts/
 
+.. image:: https://badges.frapsoft.com/os/mit/mit.svg?v=103
+        :target: https://opensource.org/licenses/mit-license.php
 
 
 Bottom-up procedural generation
