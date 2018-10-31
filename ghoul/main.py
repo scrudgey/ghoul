@@ -106,7 +106,7 @@ class Symbol(object):
             symbol = Symbol(symbol)
 
         # adopt new values
-        self.InitVals(Subset(self, symbol))
+        self.InitVals(Intersection(self, symbol))
 
         # recalculate my attributes
         self.CalcAttributes()
@@ -129,7 +129,7 @@ class Symbol(object):
             if attribute_name in value_attributes:
                 # v.p -> v.p ∩ child
                 value_attribute = value_attributes[attribute_name]
-                intersection = Subset(value_attribute, child)
+                intersection = Intersection(value_attribute, child)
                 if intersection is None:
                     return False
                 else:
@@ -171,9 +171,9 @@ def MethodsDict(obj):
         methods = {k: v for k, v in methods.items() if fn(k, v)}
     return methods
 
-def Subset(value, target, depth=0):
-    '''Return the intersection of value and target. If no
-    such subset exists, return None
+def Intersection(value, target, depth=0):
+    '''Return value ∩ target. 
+    If the intersection is empty, return None.
     '''
 
     #######################
@@ -181,7 +181,7 @@ def Subset(value, target, depth=0):
     #######################
 
     if type(value) is Symbol:
-        subset = Subset(value.values, target, depth=depth+1)
+        subset = Intersection(value.values, target, depth=depth+1)
         if subset is not None:
             return Symbol(subset)
         else:
@@ -190,7 +190,7 @@ def Subset(value, target, depth=0):
     # if value is a list of elements, we must return only those that are a subset
     # of target. if none are, return None.
     if type(value) is list:
-        results = [Subset(element, target, depth=depth+1) for element in value]
+        results = [Intersection(element, target, depth=depth+1) for element in value]
         results = [result for result in results if result is not None]
         if len(results) == 0:
             return None
@@ -203,12 +203,12 @@ def Subset(value, target, depth=0):
     ########################
 
     if type(target) is Symbol:
-        return Subset(value, target.values, depth=depth+1)
+        return Intersection(value, target.values, depth=depth+1)
 
     # TODO: this code is probably incorrect. create test and fix.
     if type(target) is list:
         for element in target:
-            result = Subset(value, element, depth=depth+1)
+            result = Intersection(value, element, depth=depth+1)
             if result is not None:
                 return result
         return None
