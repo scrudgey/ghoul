@@ -10,6 +10,15 @@ TODO: design test.
 
 import unittest
 from ghoul import Intersection
+from itertools import combinations
+
+# lists of lists?
+# symbols?
+VALUE_SETS = [
+    [1, 2, 3, 4, 5, 6],
+    ['a', 'b', 'c', 'd', 'e', 'f'],
+    [1, 'a', 2, 'b', 3, 'c', 4]
+]
 
 class TestValues(unittest.TestCase):
     def test_values(self):
@@ -18,12 +27,8 @@ class TestValues(unittest.TestCase):
         def _case_nonidentical(*a):
             self.assertIsNone(Intersection(a[0], a[1]))
 
-        value_sets = [
-            [1, 2],
-            ['a', 'b']
-        ]
         cases = [_case_identical, _case_nonidentical]
-        for values in value_sets:
+        for values in VALUE_SETS:
             for case in cases:
                 case(*values)
 
@@ -54,37 +59,43 @@ class TestLists(unittest.TestCase):
             self.assertTrue(Intersection([a[0], a[0], a[1]], [a[0]]) == [a[0], a[0]])
             self.assertTrue(Intersection([a[0]], [a[0], a[0], a[1]]) == [a[0], a[0]])
     
-        value_sets = [
-            [1, 2, 3, 4, 5, 6],
-            ['a', 'b', 'c', 'd', 'e', 'f']
-        ]
         cases = [_case1, _case2, _case3, _case4, _case5, _case6, _case7]
-        for values in value_sets:
+        for values in VALUE_SETS:
             for case in cases:
                 case(*values)
     
 
 class TestSetAlgebra(unittest.TestCase):
-    # commutative
-    # A ∩ B = B ∩ A
-    def _commutation(*a):
-        self.assertTrue(Intersection(a[0], a[1]) == Intersection(a[1], a[0]))
+    def test_algebra(self):
 
-    # associative
-    # (A ∩ B) ∩ C = A ∩ (B ∩ C)
+        def _commutative(*a):
+            # A ∩ B = B ∩ A
+            self.assertTrue(Intersection(a[0], a[1]) == Intersection(a[1], a[0]))
 
-    # law of identity
-    # A ∩ A = A
+        def _associative(*a):
+            # (A ∩ B) ∩ C = A ∩ (B ∩ C)
+            A = [a[0], a[1], a[2]]
+            B = [a[1], a[2], a[3]]
+            C = [a[4], a[2], a[1]]
+            self.assertTrue(Intersection(Intersection(A, B), C) == Intersection(A, Intersection(B, C)))
+        
+        def _identity(*a):
+            # A ∩ A = A
+            for i in a:
+                self.assertTrue(Intersection(i, i) == i)
+        
+        def _law_of_U(*a):
+            # U ∩ A = A
+            a = list(a)
+            for n in range(2, len(a)-1):
+                for subset in combinations(a, n):
+                    subset = list(subset)
+                    self.assertTrue(Intersection(a, subset) == subset)
 
-    # idempotent law
-    
-
-    # law of U
-    # U ∩ A = A
-
-    # distributive law
-    # A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)
-    pass
+        cases = [_commutative, _associative, _identity, _law_of_U]
+        for values in VALUE_SETS:
+            for case in cases:
+                case(*values)
 
 if __name__ == '__main__':
   unittest.main()
