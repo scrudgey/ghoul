@@ -186,17 +186,6 @@ def Intersection(value, target, depth=0):
             return Symbol(subset)
         else:
             return None
-
-    # if value is a list of elements, we must return only those that are a subset
-    # of target. if none are, return None.
-    if type(value) is list:
-        results = [Intersection(element, target, depth=depth+1) for element in value]
-        results = [result for result in results if result is not None]
-        if len(results) == 0:
-            return None
-        if len(results) == 1:
-            return results[0]
-        return results
     
     ########################
     ## TARGET IS ITERABLE ##
@@ -205,13 +194,19 @@ def Intersection(value, target, depth=0):
     if type(target) is Symbol:
         return Intersection(value, target.values, depth=depth+1)
 
-    # TODO: this code is probably incorrect. create test and fix.
-    if type(target) is list:
-        for element in target:
-            result = Intersection(value, element, depth=depth+1)
-            if result is not None:
-                return result
-        return None
+    # if value is a list of elements, we must return only those that are a subset
+    # of target. if none are, return None.
+    if type(value) is list or type(target) is list:
+        if type(value) is list:
+            results = [Intersection(element, target, depth=depth+1) for element in value]
+        elif type(target) is list:
+            results = [Intersection(value, element, depth=depth+1) for element in target]
+        results = [result for result in results if result is not None]
+        if len(results) == 0:
+            return None
+        if len(results) == 1:
+            return results[0]
+        return results
     
     ###################
     # CONCRETE VALUES #
