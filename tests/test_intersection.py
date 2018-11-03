@@ -97,5 +97,10 @@ class TestSetAlgebra(unittest.TestCase):
             for case in cases:
                 case(*values)
 
+
+class TestSpecificBehavior(unittest.TestCase):
+    def test_classes(self):
+        pass
+
 if __name__ == '__main__':
   unittest.main()
