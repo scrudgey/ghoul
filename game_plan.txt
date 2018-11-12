@@ -1,0 +1,9 @@
+Game Engine Planning
+--------------------
+
+The premise is that ghoul provides some key functionality, but is not in
+itself sufficient for realizing the game concept. What is needed is the director,
+factories, and recipes that *use* ghoul to implement gameplay.
+
+
+
