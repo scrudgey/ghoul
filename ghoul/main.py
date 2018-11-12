@@ -6,6 +6,9 @@ from collections import defaultdict
 PRIMITIVE_TYPES = [str, int, float]
 
 class Symbol(object):
+    # TODO: how to handle [Class1, Class2]?
+    # It seems this should be a symbol of nested symbols.
+    # Support / implement.
     def __init__(self, values):
         self.parent = None
         self.children = {}
@@ -191,6 +194,7 @@ def Intersection(value, target, depth=0):
     ## TARGET IS ITERABLE ##
     ########################
 
+    # TODO: why this asymmetry? build a test case and investigate.
     if type(target) is Symbol:
         return Intersection(value, target.values, depth=depth+1)
 
